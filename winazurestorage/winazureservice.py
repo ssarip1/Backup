@@ -139,7 +139,7 @@ def main():
     
     # change status to running    
     logging.debug("Setting deployment status to Running")
-    requestId = h.updateDeploymentStatus("drelu", "staging", "Running")
+    requestId = h.updateDeploymentStatus("BigJobService", "staging", "Running")
     status = h.waitForRequest(requestId);
         
     # do what ever you need to do with your Azure instances
@@ -147,10 +147,10 @@ def main():
     
     # delete deployment
     logging.debug("Deleting deployment")
-    requestId = h.updateDeploymentStatus("drelu", "staging", "Suspended")
+    requestId = h.updateDeploymentStatus("BigJobService", "staging", "Suspended")
     status = h.waitForRequest(requestId)
     
-    requestId = h.deleteDeployment("drelu", "staging")    
+    requestId = h.deleteDeployment("BigJobService", "staging")    
     status = h.waitForRequest(requestId)
     
        

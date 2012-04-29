@@ -20,6 +20,7 @@
       <Setting name="Microsoft.WindowsAzure.Plugins.Connect.Refresh" />
       <Setting name="Microsoft.WindowsAzure.Plugins.Connect.Upgrade" />
       <Setting name="Microsoft.WindowsAzure.Plugins.Connect.WaitForConnectivity" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
       <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" />
       <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" />
       <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" />

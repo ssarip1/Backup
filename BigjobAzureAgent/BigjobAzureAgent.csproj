@@ -91,6 +91,13 @@
     <None Include="resources\namd\parm99bs0_all.prm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="resources\namd\Replica_Agent.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\namd\Replica_Agent.vshost.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\namd\Replica_Agent.vshost.exe.manifest" />
     <None Include="resources\namd\sbox_init.psf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -100,12 +107,38 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Newtonsoft.Json.dll" />
+    <Content Include="resources\namd\Microsoft.WindowsAzure.Diagnostics.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\namd\Microsoft.WindowsAzure.Diagnostics.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\namd\Microsoft.WindowsAzure.StorageClient.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\namd\Microsoft.WindowsAzure.StorageClient.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="resources\namd\namd2.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\namd\Newtonsoft.Json.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\namd\Newtonsoft.Json.pdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\namd\Newtonsoft.Json.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\namd\psfgen.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="resources\namd\Replica_Agent.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\namd\Replica_Agent.pdb" />
+    <Content Include="resources\namd\Replica_Agent.vshost.exe" />
     <Content Include="resources\namd\sbox_init.pdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

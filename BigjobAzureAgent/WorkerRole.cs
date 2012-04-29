@@ -14,6 +14,7 @@ using System.Runtime.Serialization.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
+
 namespace BigjobAzureAgent
 {
 
@@ -191,7 +192,13 @@ namespace BigjobAzureAgent
 
                     Trace.WriteLine("Executable: " + localPath + @"\" + executable + " Arguments: " + arguments
                         + " WorkingDirectory: " + Path.Combine(localPath + @"\", workingdirectory), "Information");
+                    
+                    /* for Regular NAMD Jobs */
                     ProcessStartInfo info = new ProcessStartInfo(localPath + @"\" + executable, arguments);
+
+                    /* for Replica Agent Executable */
+                    //ProcessStartInfo info = new ProcessStartInfo(localPath + @"\" + executable, jobId);
+   
                     info.UseShellExecute = false;
                     info.ErrorDialog = false;
                     info.WorkingDirectory = Path.Combine(localPath + @"\", workingdirectory);                    

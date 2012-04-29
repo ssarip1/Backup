@@ -18,3 +18,34 @@ J:\Dr Jha Project\Backup\BigjobAzureAgent\bin\Debug\Microsoft.WindowsAzure.Stora
 J:\Dr Jha Project\Backup\BigjobAzureAgent\bin\Debug\Microsoft.WindowsAzure.Diagnostics.xml
 J:\Dr Jha Project\Backup\BigjobAzureAgent\obj\Debug\BigjobAzureAgent.dll
 J:\Dr Jha Project\Backup\BigjobAzureAgent\obj\Debug\BigjobAzureAgent.pdb
+J:\DrJhaProject\Backup\BigjobAzureAgent\bin\Debug\resources\namd\Microsoft.WindowsAzure.Diagnostics.dll
+J:\DrJhaProject\Backup\BigjobAzureAgent\bin\Debug\resources\namd\Microsoft.WindowsAzure.Diagnostics.xml
+J:\DrJhaProject\Backup\BigjobAzureAgent\bin\Debug\resources\namd\Microsoft.WindowsAzure.StorageClient.dll
+J:\DrJhaProject\Backup\BigjobAzureAgent\bin\Debug\resources\namd\Microsoft.WindowsAzure.StorageClient.xml
+J:\DrJhaProject\Backup\BigjobAzureAgent\bin\Debug\resources\namd\namd2.exe
+J:\DrJhaProject\Backup\BigjobAzureAgent\bin\Debug\resources\namd\Newtonsoft.Json.dll
+J:\DrJhaProject\Backup\BigjobAzureAgent\bin\Debug\resources\namd\Newtonsoft.Json.pdb
+J:\DrJhaProject\Backup\BigjobAzureAgent\bin\Debug\resources\namd\Newtonsoft.Json.xml
+J:\DrJhaProject\Backup\BigjobAzureAgent\bin\Debug\resources\namd\psfgen.exe
+J:\DrJhaProject\Backup\BigjobAzureAgent\bin\Debug\resources\namd\Replica_Agent.exe
+J:\DrJhaProject\Backup\BigjobAzureAgent\bin\Debug\resources\namd\sbox_init.pdb
+J:\DrJhaProject\Backup\BigjobAzureAgent\bin\Debug\resources\namd\tcl85.dll
+J:\DrJhaProject\Backup\BigjobAzureAgent\bin\Debug\resources\namd\310K-init.coor
+J:\DrJhaProject\Backup\BigjobAzureAgent\bin\Debug\resources\namd\310K-init.xsc
+J:\DrJhaProject\Backup\BigjobAzureAgent\bin\Debug\resources\namd\NPT.conf
+J:\DrJhaProject\Backup\BigjobAzureAgent\bin\Debug\resources\namd\parm99bs0_all.prm
+J:\DrJhaProject\Backup\BigjobAzureAgent\bin\Debug\resources\namd\Replica_Agent.exe.config
+J:\DrJhaProject\Backup\BigjobAzureAgent\bin\Debug\resources\namd\Replica_Agent.vshost.exe.config
+J:\DrJhaProject\Backup\BigjobAzureAgent\bin\Debug\resources\namd\sbox_init.psf
+J:\DrJhaProject\Backup\BigjobAzureAgent\bin\Debug\BigjobAzureAgent.dll.config
+J:\DrJhaProject\Backup\BigjobAzureAgent\bin\Debug\BigjobAzureAgent.dll
+J:\DrJhaProject\Backup\BigjobAzureAgent\bin\Debug\BigjobAzureAgent.pdb
+J:\DrJhaProject\Backup\BigjobAzureAgent\bin\Debug\Microsoft.WindowsAzure.Diagnostics.dll
+J:\DrJhaProject\Backup\BigjobAzureAgent\bin\Debug\Microsoft.WindowsAzure.StorageClient.dll
+J:\DrJhaProject\Backup\BigjobAzureAgent\bin\Debug\Newtonsoft.Json.dll
+J:\DrJhaProject\Backup\BigjobAzureAgent\bin\Debug\msshrtmi.dll
+J:\DrJhaProject\Backup\BigjobAzureAgent\bin\Debug\Microsoft.WindowsAzure.StorageClient.xml
+J:\DrJhaProject\Backup\BigjobAzureAgent\bin\Debug\Microsoft.WindowsAzure.Diagnostics.xml
+J:\DrJhaProject\Backup\BigjobAzureAgent\obj\Debug\ResolveAssemblyReference.cache
+J:\DrJhaProject\Backup\BigjobAzureAgent\obj\Debug\BigjobAzureAgent.dll
+J:\DrJhaProject\Backup\BigjobAzureAgent\obj\Debug\BigjobAzureAgent.pdb

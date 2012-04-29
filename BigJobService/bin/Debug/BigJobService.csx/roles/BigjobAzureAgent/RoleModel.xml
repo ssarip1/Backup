@@ -1,6 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RoleModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BigjobAzureAgent" version="1.5.20928.1904" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
   <Startup>
+    <Task commandLine="DiagnosticsAgent.exe" taskType="background" relativePath="plugins\Diagnostics">
+      <Environment>
+        <Variable name="RdModuleName" value="Diagnostics" />
+        <Variable name="WaRoleType" value="WorkerRole" />
+      </Environment>
+    </Task>
+    <Task commandLine="DiagnosticsAgent.exe /blockStartup" relativePath="plugins\Diagnostics">
+      <Environment>
+        <Variable name="RdModuleName" value="Diagnostics" />
+        <Variable name="WaRoleType" value="WorkerRole" />
+      </Environment>
+    </Task>
     <Task commandLine="RemoteAccessAgent.exe" executionContext="elevated" taskType="background" relativePath="plugins\RemoteAccess">
       <Environment>
         <Variable name="RdModuleName" value="RemoteAccess" />
@@ -55,6 +67,7 @@
     <Setting name="AccountEncryptedPassword" nameSpace="Microsoft.WindowsAzure.Plugins.RemoteAccess" />
     <Setting name="AccountExpiration" nameSpace="Microsoft.WindowsAzure.Plugins.RemoteAccess" />
     <Setting name="Enabled" nameSpace="Microsoft.WindowsAzure.Plugins.RemoteForwarder" />
+    <Setting name="ConnectionString" nameSpace="Microsoft.WindowsAzure.Plugins.Diagnostics" />
   </ConfigurationSettings>
   <Properties>
     <Property name="RoleType" value="Worker" />
@@ -64,11 +77,11 @@
     <Property name="Platform" value="AnyCPU" />
     <Property name="SourceDir" value="" />
     <Property name="SitePhysicalPath" value="" />
-    <Property name="OutputDir" value="J:\Dr Jha Project\Backup\BigJobService\obj\Debug\BigjobAzureAgent\" />
+    <Property name="OutputDir" value="J:\DrJhaProject\Backup\BigJobService\obj\Debug\BigjobAzureAgent\" />
     <Property name="EntryPoint" value="BigjobAzureAgent.dll" />
     <Property name="RoleTargetFramework" value="v4.0" />
-    <Property name="OriginalItemSpec" value="J:\Dr Jha Project\Backup\BigJobService\BigJobService.ccproj" />
-    <Property name="MSBuildSourceProjectFile" value="J:\Dr Jha Project\Backup\BigJobService\BigJobService.ccproj" />
+    <Property name="OriginalItemSpec" value="J:\DrJhaProject\Backup\BigJobService\BigJobService.ccproj" />
+    <Property name="MSBuildSourceProjectFile" value="J:\DrJhaProject\Backup\BigJobService\BigJobService.ccproj" />
     <Property name="MSBuildSourceTargetName" value="ResolveSingleWorkerRoleReference" />
     <Property name="TargetFrameworkVersion" value="v4.0" />
     <Property name="TargetRuntimeVersion" value="v4.0" />

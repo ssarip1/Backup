@@ -22,5 +22,6 @@
       <Import moduleName="RemoteForwarder" />
       <Import moduleName="Diagnostics" />
     </Imports>
+    <LocalResources></LocalResources>
   </WorkerRole>
 </ServiceDefinition>

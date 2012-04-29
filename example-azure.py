@@ -7,7 +7,7 @@ from bigjob_azure import *
 import time
 import pdb
 
-NUMBER_JOBS=5
+NUMBER_JOBS=4
 
 
 """ Test Job Submission via Azure BigJob """
@@ -16,9 +16,9 @@ if __name__ == "__main__":
     ##########################################################################################
     # Start BigJob
     # Parameter for BigJob 
-    nodes = 1 # number nodes for agent
+    nodes = 2 # number nodes for agent
     # current_directory=os.getcwd() +"/agent"  # working directory for agent
-    pdb.set_trace();  
+    #pdb.set_trace();  
     # start pilot job (bigjob_agent)
     print "Start Pilot Job/BigJob in the cloud. "
     start = time.time()

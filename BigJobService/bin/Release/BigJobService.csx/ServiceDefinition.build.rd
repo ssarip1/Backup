@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BigJobService" generation="1" functional="0" release="0" Id="c024b577-2a62-4b85-b72a-6ea92b67d331" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BigJobService" generation="1" functional="0" release="0" Id="8d9c786c-93be-450d-8f75-698dc6df5ea8" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="BigJobServiceGroup" generation="1" functional="0" release="0">
       <componentports>
@@ -287,7 +287,7 @@
       </maps>
       <components>
         <groupHascomponents>
-          <role name="BigjobAzureAgent" generation="1" functional="0" release="0" software="J:\Dr Jha Project\Backup\BigJobService\bin\Release\BigJobService.csx\roles\BigjobAzureAgent" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaWorkerHost.exe " memIndex="768" hostingEnvironment="consoleroleadmin" hostingEnvironmentVersion="2">
+          <role name="BigjobAzureAgent" generation="1" functional="0" release="0" software="J:\DrJhaProject\Backup\BigJobService\bin\Release\BigJobService.csx\roles\BigjobAzureAgent" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaWorkerHost.exe " memIndex="768" hostingEnvironment="consoleroleadmin" hostingEnvironmentVersion="2">
             <componentports>
               <inPort name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput" protocol="tcp" />
               <inPort name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Rdp" protocol="tcp" portRanges="3389" />
@@ -352,9 +352,9 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="63e2dfc0-c0d4-44d3-b400-fe15a49a9865" ref="Microsoft.RedDog.Contract\ServiceContract\BigJobServiceContract@ServiceDefinition.build">
+    <implementation Id="d9d5c170-62cd-416b-a2e0-58cefe28858c" ref="Microsoft.RedDog.Contract\ServiceContract\BigJobServiceContract@ServiceDefinition.build">
       <interfacereferences>
-        <interfaceReference Id="520bd9dc-93f8-4360-96f0-12e4f33be2af" ref="Microsoft.RedDog.Contract\Interface\BigjobAzureAgent:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput@ServiceDefinition.build">
+        <interfaceReference Id="99991ebb-fddb-45f0-a38b-0d3940c6aaa9" ref="Microsoft.RedDog.Contract\Interface\BigjobAzureAgent:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput@ServiceDefinition.build">
           <inPort>
             <inPortMoniker name="/BigJobService/BigJobServiceGroup/BigjobAzureAgent:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput" />
           </inPort>

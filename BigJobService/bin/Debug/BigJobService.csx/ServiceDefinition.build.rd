@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BigJobService" generation="1" functional="0" release="0" Id="be5d955f-9f5e-48ad-ae31-f70cf31102d0" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BigJobService" generation="1" functional="0" release="0" Id="b2dc7cce-e519-4890-b0e1-23f3520aa6df" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="BigJobServiceGroup" generation="1" functional="0" release="0">
       <componentports>
@@ -98,6 +98,11 @@
         <aCS name="BigjobAzureAgent:Microsoft.WindowsAzure.Plugins.Connect.WaitForConnectivity" defaultValue="">
           <maps>
             <mapMoniker name="/BigJobService/BigJobServiceGroup/MapBigjobAzureAgent:Microsoft.WindowsAzure.Plugins.Connect.WaitForConnectivity" />
+          </maps>
+        </aCS>
+        <aCS name="BigjobAzureAgent:Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" defaultValue="">
+          <maps>
+            <mapMoniker name="/BigJobService/BigJobServiceGroup/MapBigjobAzureAgent:Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
           </maps>
         </aCS>
         <aCS name="BigjobAzureAgent:Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" defaultValue="">
@@ -239,6 +244,11 @@
             <aCSMoniker name="/BigJobService/BigJobServiceGroup/BigjobAzureAgent/Microsoft.WindowsAzure.Plugins.Connect.WaitForConnectivity" />
           </setting>
         </map>
+        <map name="MapBigjobAzureAgent:Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" kind="Identity">
+          <setting>
+            <aCSMoniker name="/BigJobService/BigJobServiceGroup/BigjobAzureAgent/Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+          </setting>
+        </map>
         <map name="MapBigjobAzureAgent:Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" kind="Identity">
           <setting>
             <aCSMoniker name="/BigJobService/BigJobServiceGroup/BigjobAzureAgent/Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" />
@@ -277,7 +287,7 @@
       </maps>
       <components>
         <groupHascomponents>
-          <role name="BigjobAzureAgent" generation="1" functional="0" release="0" software="J:\Dr Jha Project\Backup\BigJobService\bin\Debug\BigJobService.csx\roles\BigjobAzureAgent" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaWorkerHost.exe " memIndex="768" hostingEnvironment="consoleroleadmin" hostingEnvironmentVersion="2">
+          <role name="BigjobAzureAgent" generation="1" functional="0" release="0" software="J:\DrJhaProject\Backup\BigJobService\bin\Debug\BigJobService.csx\roles\BigjobAzureAgent" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaWorkerHost.exe " memIndex="768" hostingEnvironment="consoleroleadmin" hostingEnvironmentVersion="2">
             <componentports>
               <inPort name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput" protocol="tcp" />
               <inPort name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Rdp" protocol="tcp" portRanges="3389" />
@@ -306,6 +316,7 @@
               <aCS name="Microsoft.WindowsAzure.Plugins.Connect.Refresh" defaultValue="" />
               <aCS name="Microsoft.WindowsAzure.Plugins.Connect.Upgrade" defaultValue="" />
               <aCS name="Microsoft.WindowsAzure.Plugins.Connect.WaitForConnectivity" defaultValue="" />
+              <aCS name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" defaultValue="" />
               <aCS name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" defaultValue="" />
               <aCS name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" defaultValue="" />
               <aCS name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" defaultValue="" />
@@ -341,9 +352,9 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="d20f2804-4aab-40fc-b536-e06ef6463cfe" ref="Microsoft.RedDog.Contract\ServiceContract\BigJobServiceContract@ServiceDefinition.build">
+    <implementation Id="c6c1cf10-60c4-4672-b938-65715c4d00ac" ref="Microsoft.RedDog.Contract\ServiceContract\BigJobServiceContract@ServiceDefinition.build">
       <interfacereferences>
-        <interfaceReference Id="eac84083-82a2-43bb-ad6e-1b3c4e7f6a5a" ref="Microsoft.RedDog.Contract\Interface\BigjobAzureAgent:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput@ServiceDefinition.build">
+        <interfaceReference Id="bf2b1c16-1bf0-4958-ba6a-fe23647488f8" ref="Microsoft.RedDog.Contract\Interface\BigjobAzureAgent:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput@ServiceDefinition.build">
           <inPort>
             <inPortMoniker name="/BigJobService/BigJobServiceGroup/BigjobAzureAgent:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput" />
           </inPort>

@@ -14,7 +14,7 @@ import sys
 import os
 import pdb
 print os.getcwd()
-sys.path.append(os.getcwd() + '/winazurestorage/')
+sys.path.append('J:\DrJhaProject\Backup\winazurestorage')
 
 import getopt
 import time
@@ -51,9 +51,6 @@ NODE_FILE = "nodefile"
 CONFIG_FILE="bigjob_azure.conf"
 
 
-
-
-
 class bigjob_azure():
     
     def __init__(self, database_host=None):
@@ -84,7 +81,10 @@ class bigjob_azure():
         self.uuid = str(uuid.uuid1())        
         self.app_id = APPLICATION_NAME
         logging.debug("Self.app_id is Application Name: " + self.app_id)
-        self.blob = BlobStorage(host = "blob.core.windows.net", 
+        """self.blob = BlobStorage(host = "blob.core.windows.net", 
+                             account_name = self.account_name_storage, 
+                             secret_key = self.secret_key)"""
+        self.blob = BlobStorage(host = "127.0.0.1:10000", 
                              account_name = self.account_name_storage, 
                              secret_key = self.secret_key)
         result = self.blob.create_container(self.app_id)
