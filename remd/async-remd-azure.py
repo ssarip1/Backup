@@ -182,9 +182,15 @@ class ReManager():
     def run_REMDg(self):
         
         """ Main loop running replica-exchange """
+<<<<<<< HEAD
         REMD_start = time.time()
         numEX = self.exchange_count    
         ofilename = "async-remd-temp-4M-16cores.out"
+=======
+        start = time.time()
+        numEX = self.exchange_count    
+        ofilename = "remd-temp.out"
+>>>>>>> ee011da7056795d4d9bb742878ffd137e871135f
         print "Start Bigjob"
         self.bj = self.start_bigjob(self.number_of_nodes)
         if self.bj==None or self.bj.get_state_detail()=="Failed":
@@ -192,7 +198,11 @@ class ReManager():
        
         iEX = 0
         total_number_of_namd_jobs = 0
+<<<<<<< HEAD
         while (iEX < numEX):
+=======
+        while 1:
+>>>>>>> ee011da7056795d4d9bb742878ffd137e871135f
             print "\n"
             # reset replica number
                        
@@ -203,7 +213,11 @@ class ReManager():
             state = self.bj.get_state_detail()  
             pilot_url = self.bj.pilot_url 
             print "Pilot: " + pilot_url + " state: " + state
+<<<<<<< HEAD
  
+=======
+             
+>>>>>>> ee011da7056795d4d9bb742878ffd137e871135f
             if state.lower()== "running":
                 logging.debug("pilot job running - start " + str(self.total_number_replica) + " jobs.")
                 for i in range (0, self.total_number_replica):
@@ -224,6 +238,7 @@ class ReManager():
             print "started " + "%d"%numReplica + " of " + str(self.total_number_replica) + " in this round." 
             print "Time for spawning " + "%d"%numReplica + " replica: " + str(end_time-start_time) + " s"
 
+<<<<<<< HEAD
             print  ####################################### async-job monitoring step ###############################
             energy = [0 for i in range(0, numReplica)]
             flagJobDone = [ False for i in range(0, numReplica)]
@@ -314,6 +329,108 @@ class ReManager():
             ofile.close()      
         
         print "REMD Runtime: " + str(time.time()-REMD_start) + " sec; Pilot URL: " + str(self.bj.pilot_url) \
+=======
+            ####################################### async-job monitoring step ###############################
+            print ############## async-job monitoring #################
+            energy = [0 for i in range(0, numReplica)]
+            flagJobDone = [ False for i in range(0, numReplica)]
+            numJobDone = 0
+    
+            print "\n" 
+            while 1:    
+                #print "\n##################### Replica State Check at: " + time.asctime(time.localtime(time.time())) + " ########################"
+                for irep in range(0, numReplica):
+                    print "\n##################### Replica State Check at: " + time.asctime(time.localtime(time.time())) + " ########################"
+                    running_job = self.replica_jobs[irep]
+                    try: 
+                        state = running_job.get_state()
+                    except:
+                        pass
+                    print "replica_id: " + str(irep) + " job: " + str(running_job) + " received state: " + str(state)\
+                                         + " Time since launch: " + str(time.time()-start) + " sec"
+                    if (str(state) == "Done") and (flagJobDone[irep] is False) :   
+                        print "(INFO) Replica " + "%d"%irep + " done"
+                        energy[irep] = self.get_energy(irep) ##todo get energy from right host
+                        flagJobDone[irep] = True
+                        numJobDone = numJobDone + 1
+                        #done_time=time.time()
+                        #total_number_of_namd_jobs = total_number_of_namd_jobs + 1
+                        ####################################### Replica Exchange ##################################    
+                        # replica exchange step        
+                        print "\n(INFO) Now trying to look for an exchange ...."
+                        j=irep
+                        frep=0
+                        list[]
+                        for frep in range(0,numReplica-1):
+                          print "found a replica in Done State and looking for any other replicas in Done State"
+                          print "time.asctime(time.localtime(time.time()))"
+                          if(str(state) == "Done" and (frep!=j)):
+                            list.append[frep]
+                            print str(frep) + "......replica is in Done state"
+                          elif(frep==j):
+                            print "Checking the same replica...."
+                          else:
+                            print str(frep) + "Not in Done State"
+                           
+                        if len(list)!=0:
+                            print "possible replicas exchange found"
+                            k=0
+                            for k in list:
+                                if(float(energy[k] < 1) :
+                                   # print time
+                                   en_a = energy[k]
+                                   en_b = energy[irep]
+                                   self.do_exchange(energy, k, irep)
+                                   print time.asctime(time.localtime(time.time()))+ " ######## exchange completed"
+                                   iEX = iEX +1
+                                   output_str = "%5d-th EX :"%iEX
+                                   output_str = output_str + "  %s"%self.temperatures[irep]
+                                   print "\n\nExchange result : "
+                                   print output_str + "\n\n"
+                                   print time.asctime(time.localtime(time.time()))+ " ######## exchange completed"
+                                   break
+                                else:
+                                   print str(len(list))+ " = length of list, compared replica not selected, comparing other replicas"
+                            break
+                        else :
+                           pass
+
+                    elif(str(state)=="Failed"):
+                        self.stop_glidin_jobs()
+                        sys.exit(1)
+                
+            if iEX == numEX:
+               break
+            #time.sleep(15)
+    
+            ####################################### Replica Exchange ##################################    
+            # replica exchange step        
+            #print "\n(INFO) Now exchange step...."
+            #for irep in range(0, numReplica-1):
+            #    en_a = energy[irep]
+            #    en_b = energy[irep+1]
+            #    self.do_exchange(energy, irep, irep+1)
+    
+            #iEX = iEX +1
+            #output_str = "%5d-th EX :"%iEX
+            #for irep in range(0, numReplica):
+            #    output_str = output_str + "  %s"%self.temperatures[irep]
+            
+            #print "\n\nExchange result : "
+            #print output_str + "\n\n"
+            
+            #ofile = open(ofilename,'a')
+            #for irep in range(0, numReplica):
+            #    ofile.write(" %s"%(self.temperatures[irep]))
+            #ofile.write(" \n")            
+            #ofile.close()
+    
+            #if iEX == numEX:
+            #    break
+          
+        
+        print "REMD Runtime: " + str(time.time()-start) + " sec; Pilot URL: " + str(self.bj.pilot_url) \
+>>>>>>> ee011da7056795d4d9bb742878ffd137e871135f
                 + "; number replica: " + str(self.total_number_replica) \
                 + "; number namd jobs: " + str(total_number_of_namd_jobs)
         # stop gliding job        
@@ -324,7 +441,11 @@ class ReManager():
 #  main
 #########################################################
 if __name__ == "__main__" :
+<<<<<<< HEAD
     #pdb.set_trace()
+=======
+    pdb.set_trace()
+>>>>>>> ee011da7056795d4d9bb742878ffd137e871135f
     start = time.time()
     op = optparse.OptionParser()
     op.add_option('--type','-t', default='REMD')
