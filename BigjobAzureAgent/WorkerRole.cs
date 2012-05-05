@@ -60,7 +60,7 @@ namespace BigjobAzureAgent
                 if (queueMessage.AsString == "STOP")
                 {
                     //put STOP message back in queue
-                    queue.AddMessage(queueMessage);
+                    //queue.AddMessage(queueMessage);
                     break; //exit while loop and worker role
                 }
                 else
@@ -70,10 +70,11 @@ namespace BigjobAzureAgent
                     {
                         //success - delete message
                         UpdateState(jobId, "Done");
+                        Trace.WriteLine(" queue value is : " + queue.ToString());
                         queue.DeleteMessage(queueMessage);
-                        //queue.DeleteMessage(queueMessage.Id, queueMessage.PopReceipt);
+                        /*queue.DeleteMessage(queueMessage.Id, queueMessage.PopReceipt);
                         
-                        //getCloudBlobContainer().GetBlobReference(jobId).Delete();
+                        getCloudBlobContainer().GetBlobReference(jobId).Delete(); */
                     }
                     else
                     {
@@ -147,15 +148,21 @@ namespace BigjobAzureAgent
                     spmdvariation = (string)jobDict["spmd_variation"];
                 }
                 String arguments = "";
+                string argArray = "";
                 if (jobDict.ContainsKey("arguments"))
                 {
-                    JArray argumentArray = (JArray)jobDict["arguments"];
+                    //JArray argumentArray = (JArray)jobDict["arguments"];
+                    argArray= jobDict ["arguments"].ToString ();
+                    Trace.WriteLine("argArray is :" + argArray);
+                    
+                    /*     
                     foreach (JValue a in argumentArray)
                     {
                         string newArg = a.ToString();
                         newArg = substituteTempDir(newArg);
                         arguments = arguments + " " + newArg;
                     }
+                    */
                 }
                 String executable = (string)jobDict["executable"];
 
@@ -194,10 +201,15 @@ namespace BigjobAzureAgent
                         + " WorkingDirectory: " + Path.Combine(localPath + @"\", workingdirectory), "Information");
                     
                     /* for Regular NAMD Jobs */
-                    ProcessStartInfo info = new ProcessStartInfo(localPath + @"\" + executable, arguments);
+                    //ProcessStartInfo info = new ProcessStartInfo(localPath + @"\" + executable, arguments);
 
                     /* for Replica Agent Executable */
-                    //ProcessStartInfo info = new ProcessStartInfo(localPath + @"\" + executable, jobId);
+                                       
+                    //ProcessStartInfo info = new ProcessStartInfo(localPath + @"\" + executable, jobId );
+                    //Trace.WriteLine(" Calling Replica Agent " + executable + " " + jobId + "/" + argArray);
+                    string args = jobId + " " + argArray;
+                    ProcessStartInfo info = new ProcessStartInfo(localPath + @"\" + executable, args);
+                        
    
                     info.UseShellExecute = false;
                     info.ErrorDialog = false;

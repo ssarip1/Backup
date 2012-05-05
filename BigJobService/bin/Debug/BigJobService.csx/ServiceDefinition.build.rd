@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BigJobService" generation="1" functional="0" release="0" Id="b2dc7cce-e519-4890-b0e1-23f3520aa6df" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BigJobService" generation="1" functional="0" release="0" Id="6cb9c013-a66b-4868-af65-40723d33e0f9" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="BigJobServiceGroup" generation="1" functional="0" release="0">
       <componentports>
@@ -352,9 +352,9 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="c6c1cf10-60c4-4672-b938-65715c4d00ac" ref="Microsoft.RedDog.Contract\ServiceContract\BigJobServiceContract@ServiceDefinition.build">
+    <implementation Id="34066d9e-1f01-471f-9f55-af0bb00dd147" ref="Microsoft.RedDog.Contract\ServiceContract\BigJobServiceContract@ServiceDefinition.build">
       <interfacereferences>
-        <interfaceReference Id="bf2b1c16-1bf0-4958-ba6a-fe23647488f8" ref="Microsoft.RedDog.Contract\Interface\BigjobAzureAgent:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput@ServiceDefinition.build">
+        <interfaceReference Id="77c7675f-bbe0-4aa1-9065-2a0b5d468408" ref="Microsoft.RedDog.Contract\Interface\BigjobAzureAgent:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput@ServiceDefinition.build">
           <inPort>
             <inPortMoniker name="/BigJobService/BigJobServiceGroup/BigjobAzureAgent:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput" />
           </inPort>

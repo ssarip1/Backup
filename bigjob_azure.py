@@ -15,6 +15,7 @@ import os
 import pdb
 print os.getcwd()
 sys.path.append('J:\DrJhaProject\Backup\winazurestorage')
+#sys.path.append(os.getcwd() + '\winazurestorage\')
 
 import getopt
 import time
@@ -55,8 +56,9 @@ class bigjob_azure():
     
     def __init__(self, database_host=None):
         
-        # read config file
-        conf_file =  os.path.dirname( __file__ ) + "\\" + CONFIG_FILE
+        #read config file
+        """ conf_file =  os.path.dirname( __file__ ) + "\\" + CONFIG_FILE """
+		conf_file = os.path.join(os.path.dirname( __file__ ), CONFIG_FILE)
         logging.debug("read config file: " + conf_file)
         config = ConfigParser.ConfigParser()
         config.read(conf_file)
@@ -67,7 +69,8 @@ class bigjob_azure():
         logging.debug(self.account_names_compute)
         self.slot = default_dict["slot"]
         self.secret_key = default_dict["secret_key"]
-        self.user_certificate = os.path.dirname(__file__) +"/"+default_dict["user_certificate"]
+        #self.user_certificate = os.path.dirname(__file__) +"/"+default_dict["user_certificate"]
+		self.user_certificate = os.path.join(os.path.dirname(__file__), default_dict["user_certificate"])
         logging.debug(self.user_certificate)
         self.subscription_id = default_dict["subscription_id"]
         logging.debug(self.subscription_id)
@@ -75,7 +78,8 @@ class bigjob_azure():
         
         self.service_package = default_dict["service_package"]
         logging.debug(self.service_package)
-        self.service_configuration = os.path.dirname(__file__) +"/"+default_dict["service_configuration"]
+		self.service_configuration =os.path.join(os.path.dirname(__file__),default_dict["service_configuration"])
+        #self.service_configuration = os.path.dirname(__file__) +"/"+default_dict["service_configuration"]
         logging.debug(self.service_configuration)        
         logging.debug("init azure storage: blob and queue") 
         self.uuid = str(uuid.uuid1())        
