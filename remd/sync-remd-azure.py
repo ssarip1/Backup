@@ -76,6 +76,7 @@ class ReManager():
         #jd.number_of_processes = self.number_of_processes
         jd.spmd_variation = "single"
         jd.arguments = self.arguments
+        #jd.arguments = self.replica_id 
         jd.working_directory = "$TEMP"
         jd.output = "stdout"
         jd.error = "stderr"
@@ -120,6 +121,7 @@ class ReManager():
             items = line.split()
             if len(items) > 0:
                 if items[0] in ("ENERGY:"):
+                    
                     en = items[11]  
         print "(DEBUG) energy : " + str(en) + " from replica " + str(replica_id) 
         return eval(en)
@@ -144,7 +146,6 @@ class ReManager():
     
         print "(DEBUG) delta = %f"%delta + " en_a = %f"%en_a + " from rep " + str(irep) + " en_b = %f"%en_b +" from rep " + str(jrep)
 
-
     def submit_subjob(self,  jd):
         """ submit job via pilot job"""       
         sj = subjob(bigjob=self.bj)
@@ -162,6 +163,7 @@ class ReManager():
   
     def stop_bigjob(self):
         """ stop pilot job """
+        pdb.set_trace()
         self.bj.cancel()
   
     
@@ -184,7 +186,7 @@ class ReManager():
         """ Main loop running replica-exchange """
         start = time.time()
         numEX = self.exchange_count    
-        ofilename = "remd-temp.out"
+        ofilename = "sync-remd-temp-4R-4M-16c.out"
         print "Start Bigjob"
         self.bj = self.start_bigjob(self.number_of_nodes)
         if self.bj==None or self.bj.get_state_detail()=="Failed":
@@ -195,7 +197,7 @@ class ReManager():
         while 1:
             print "\n"
             # reset replica number
-                       
+            print " (Exchange Count) INFO iEX:"+ str(iEX) +"\n"          
             print "############# spawn jobs ################"
             self.replica_jobs = []            
             start_time = time.time()
@@ -263,7 +265,7 @@ class ReManager():
                 en_b = energy[irep+1]
                 self.do_exchange(energy, irep, irep+1)
     
-            iEX = iEX +1
+            iEX = iEX + (numReplica/2)
             output_str = "%5d-th EX :"%iEX
             for irep in range(0, numReplica):
                 output_str = output_str + "  %s"%self.temperatures[irep]
@@ -292,7 +294,7 @@ class ReManager():
 #  main
 #########################################################
 if __name__ == "__main__" :
-    pdb.set_trace()
+    #pdb.set_trace()
     start = time.time()
     op = optparse.OptionParser()
     op.add_option('--type','-t', default='REMD')

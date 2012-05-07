@@ -71,12 +71,14 @@ class ReManager():
     #####################################
     #  Elementary Functions
     ########################################################
-    def get_job_description(self, replica_id):        
+    def get_job_description(self, replica_id,temperature,total_number_replica):        
         jd = description()  
-        jd.executable = "approot\\resources\\namd\\namd2.exe"
-        #jd.number_of_processes = self.number_of_processes
+        #jd.executable = "approot\\resources\\namd\\namd2.exe"
+        jd.executable = "approot\\resources\\namd\\Replica_Agent"
+        jd.number_of_processes ="1" 
         jd.spmd_variation = "single"
-        jd.arguments = self.arguments
+        #jd.arguments = self.arguments
+        jd.arguments = str(replica_id) + " " +str(temperature) + " "+ str(self.total_number_replica)
         jd.working_directory = "$TEMP"
         jd.output = "stdout"
         jd.error = "stderr"
@@ -87,7 +89,6 @@ class ReManager():
         transfer ["target"] = jd.working_directory + "NPT.conf"     # target for staging out (see JSDL spec)   
         jd.filetransfer = [transfer]         
         return jd
-
     
     def submit_job(self, dest_url_string, jd):
         error_string = ""
@@ -95,7 +96,6 @@ class ReManager():
         new_job = js.create_job(jd)
         new_job.run()
         return error_string, new_job
-   
 
     def prepare_NAMD_config(self, replica_id):
         # The idea behind this is that we can simply modify NPT.conf before submit a job to set temp and other variables
@@ -108,6 +108,10 @@ class ReManager():
                 if eval(temp) != self.temperatures[replica_id]:
                     print "\n (DEBUG) temperature is changing to " + str(self.temperatures[replica_id]) + " from " + temp + " for rep" + str(replica_id)
                     lines[lines.index(line)] = "set desired_temp %s \n"%(str(self.temperatures[replica_id]))
+                    return self.temperatures[replica_id]
+                else:
+                    return eval(temp) 
+
         ifile.close() 
         ofile = open("NPT.conf","w")
         for line in lines:    
@@ -188,13 +192,12 @@ class ReManager():
         #pdb.set_trace()
         REMD_start = time.time()
         numEX = self.exchange_count    
-        ofilename = "async-remd-temp-4R-4M-16c.out"
         print "Start Bigjob"
         self.bj = self.start_bigjob(self.number_of_nodes)
         if self.bj==None or self.bj.get_state_detail()=="Failed":
             return       
-        iEX = 0
-       
+        iEX= int(self.bj.get_count())
+        print "\n (INFO) Exchange Count is: " + str(iEX) 
         print "\n"
         # reset replica number
                      
@@ -210,9 +213,12 @@ class ReManager():
            logging.debug("pilot job running - start " + str(self.total_number_replica) + " jobs.")
            for i in range (0, self.total_number_replica):
                     #self.stage_files([os.getcwd() + "/NPT.conf"], self.blob_container, replica_id)
-                    print "\n (INFO) ################ replica id  spawning ###########################  " + str(replica_id)
-                    self.prepare_NAMD_config(replica_id)
-                    jd = self.get_job_description(replica_id)
+                    #print "\n (INFO) ################ replica id  spawning ###########################  " + str(replica_id)
+                    #pdb.set_trace()
+                    temperature=self.prepare_NAMD_config(replica_id)
+                    #print "\n (INFO) Temperature is : " + str(temperature)
+                    jd = self.get_job_description(replica_id,temperature,self.total_number_replica)
+                    #print "\n (INFO) Job Descrption Arguments are: " + str(jd)
                     new_job = self.submit_subjob(jd)
                     #pdb.set_trace()
                     self.replica_jobs.insert(replica_id, new_job)
@@ -225,17 +231,10 @@ class ReManager():
     
         print "started " + "%d"%numReplica + " of " + str(self.total_number_replica) + " in this round." 
         print "Time for spawning " + "%d"%numReplica + " replica: " + str(end_time-start_time) + " s"
-
+        
+        print "\n (EXCHANGE COUNT) INFO : " + str(iEX)
         print  ####################################### async-job monitoring step ###############################
-        energy = [0 for i in range(0, numReplica)]
-        #flagJobDone = [ False for i in range(0, numReplica)]
-        #flagExchangeDone = [ False for i in range(0, numReplica)]
-        #flagJobCount = [ False for i in range(0, numReplica)]
-        #numJobDone = 0
-        print "\n" 
-        total_number_of_namd_jobs = 0
         while (iEX < numEX):
-            print "\n (EXCHANGE COUNT) INFO : " + str(iEX)
             print "\n##################### Replica State Check at: " + time.asctime(time.localtime(time.time())) + " ########################"
             for irep in range(0, numReplica):
                 running_job = self.replica_jobs[irep]
@@ -246,63 +245,22 @@ class ReManager():
                 print "replica_id: " + str(irep) + " job: " + str(running_job) + " received state: " + str(state)\
                                      + " Time since launch: " + str(time.time()-REMD_start) + " sec"
                     
-                if ((str(state) == "Done") and (iEX < numEX)):   
-                   print "\n(INFO) Replica " + "%d"%irep + " done"
-                   energy[irep] = self.get_energy(irep) ##todo get energy from right host
-                   total_number_of_namd_jobs = total_number_of_namd_jobs + 1
-                   ####################################### Replica Exchange ##################################    
-                   # replica exchange step        
-                   print "\n(INFO)   " + "replica_id:"+ str(irep)+ " is in Done State " + " and looking for an exchange"
-                   #print "\n(INFO)  " + " Number of Job Done:  " + str(numJobDone) 
-                   j=irep
-                   frep=0
-                   list=[]
-                   for frep in range(0,numReplica):
-                       running_job_frep = self.replica_jobs[frep] 
-                       try:
-                          state = running_job_frep.get_state()
-                       except:
-                          pass
-                       if(str(state) == "Done" and (frep!=j)):
-                          print "\n(INFO)" + "replica_id: " + str(irep) + " found " + "replica_id: " + str(frep) + " in done state " 
-                          energy[frep] = self.get_energy(frep) ##todo get energy from right host
-                          total_number_of_namd_jobs = total_number_of_namd_jobs + 1
-                          en_a = energy[frep]
-                          en_b = energy[irep]
-                          self.do_exchange(energy,frep, irep)
-                          print "\n(INFO) replica_id:" + str(irep) + " exchanged temperature with " + "replica_id: " + str(frep) + "\n" 
-                          iEX=iEX + 1        
-                          print "\n (Replica Exchange INFO) iEX=" + str(iEX)
-                          if(iEX< numEX):
-                               jd = self.get_job_description(frep)
-                               new_job = self.submit_subjob(jd)
-                               self.replica_jobs[frep]= new_job
-                               print "\n (INFO) Replica " + "%d"%frep + " started "
-                               jd = self.get_job_description(irep)
-                               new_job = self.submit_subjob(jd)
-                               self.replica_jobs[irep]= new_job
-                               print "\n (INFO) Replica " + "%d"%irep + " started"  
-                          else:
-                               pass
-                          break
-                       elif(frep==j):
-                          print "\n Checking the same replica........." + str(irep)
-                       elif(iEX>=numEX):
-                          break
-                       else:
-                          print "\n replica_id:" + str(frep) + "  Not in Done State \n "
+                if ((str(state) == "Done") and (iEX< numEX)):   
+                   print "\n\n(INFO) Replica " + "%d"%irep + " done"
 
                 elif(str(state)=="Failed"):
                   self.stop_glidin_jobs()
                   sys.exit(1)
+
                 elif(iEX>=numEX):
                   break
-                else:
-                  pass
+            time.sleep(5) 
+            iEX=int(self.bj.get_count())
+            print "\n (EXCHANGE COUNT) INFO : " + str(iEX)
             
         print "REMD Runtime: " + str(time.time()-REMD_start) + " sec; Pilot URL: " + str(self.bj.pilot_url) \
-                + "; number replica: " + str(self.total_number_replica) \
-                + "; number namd jobs: " + str(total_number_of_namd_jobs)
+                + "; number replica: " + str(self.total_number_replica) 
+               
         # stop gliding job        
         self.stop_bigjob()
 
